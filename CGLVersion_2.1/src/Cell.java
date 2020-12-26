@@ -11,17 +11,12 @@ public class Cell {
 	int cols;
 	boolean alive;
 
-//	public Cell() {
-//		
-//	}
 	/**
 	 * 
 	 * @param rows
 	 * @param cols
 	 */
-	public Cell() {
-		
-	}
+
 	public Cell(int rows,int cols) {
 		this.rows=rows;
 		this.cols=cols;
@@ -46,10 +41,6 @@ public class Cell {
 	public boolean isAlive(boolean alive) {
 		return alive;
 	}
-	public boolean [][] nextgen(boolean[][]board){
-		return null;
-	}
-	
-	
+
 	
 }

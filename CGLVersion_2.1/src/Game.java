@@ -23,47 +23,36 @@ import java.util.Scanner;
 public class Game {
 	
 	int kthgen;
-//	public Game() {
-//		
-//	}
 	Board b;
-	/**
-	 * 
-	 * @param kthgen
-	 */
-	public Game(int kthgen) {
-		this.kthgen=kthgen;
-	}
-		/**
-	 * 
-	 * @param args
-	 */
-	   public static void main(String[] args) {
+	
+	public String start() 
+	// when ever you call sample method, it read the inputs from user.
+	{
+		// b=new Board(); // object for board.
 	        Scanner sc = new Scanner(System.in);
-	        
+	       
 	        // Reading size of the Board
-	        int n = sc.nextInt();
-	        
+	        int n = sc.nextInt();  
+	       
 	        // Reading no. of initial live cells
 	        int m = sc.nextInt();
 	        int[][] l = new int[m][2];
-	        int i = 0;
-	        
+	       
+	         
 	        // Reading Live cells
-	        while (sc.hasNextInt()) {
-	            l[i][0] = sc.nextInt();
-	            l[i++][1] = sc.nextInt();
+	        for (int i = 0; i < m; i++) {
+	            l[i][0] = sc.nextInt();  
+	            l[i][1] = sc.nextInt();
 	        }
-	        
-	        // creating instance to CGLVersion2
-	        Game c = new Game(1);
-	        c.b= new Board(n,l);
-	        c.b.createBoard(n,arr);
-	        
-	        // creating nextgenratin by calling nextgenration method
-	        c.generateNextGeneration(c.Board(n, l));
 	        sc.close();
-	    }	
+	     // calling createBoard method in board using object.
+	        Board b = new Board(n, l);
+	        while(true) {
+	        System.out.println( b.nextgen().toString()); 
+	        return ("Game started");
+	        }
+	  
+	}  
 }
 
 

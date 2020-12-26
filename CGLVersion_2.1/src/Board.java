@@ -9,7 +9,7 @@ public class Board {
 	 * board size for n*n size
 	 * a boolean array for board creation
 	 */
-	Cell cell=new Cell();
+	
 	int boardsize;
 	boolean[][]arr;
 
@@ -20,69 +20,85 @@ public class Board {
 	 * @return
 	 * this method creates a board
 	 */
-	 public boolean createBoard(int n,int l[][]) {
-		 if(n<=0) {
-			 return false;
-		 }
-		 else {
-			 if(l==null)
-					return true;
-			 boolean arr[][]=new boolean[n][n];
-			 for(int i=0;i<l.length;i++){
-			        for(int j=0;j<l[i].length;j++) {
-			        	arr[i][j]=false;
-			        }
-			      }
-			 for(int i=0;i<l.length;i++) {
-					
-					
-					arr[l[i][0]][l[i][1]]=true;
-				}
-//			 System.out.println("NextGeneration");
-//			 displayBoard(cell.nextgen(arr));
-//			 System.out.println("CurrentGenration");
-//			 displayBoard(arr); // prints current generation.
-			 for(int i=0;i<=5;i++) // this loop is used to print five generations.
-			 {
-				 int count=0;
-				 for(int k=0;k<n;k++) // checks whether the board is existed or not.
-				 {
-					 for(int j=0;j<n;j++) {
-						 if(arr[k][j]==true)
-							 count=1;
-					 }
-				 }
-				 if(count==0)
-					 break;
-//	        System.out.println("NextGenration");
-	        arr=cell.nextgen(arr);
-	        displayBoard(arr); // prints next generation.
+	public Board(int boardsize, int l[][]) {
+	    this.boardsize = boardsize ;
+	    this.arr = new boolean[boardsize ][boardsize ];
+	    for (int i = 0; i < arr.length; i++) {
+	        for (int j = 0; j < arr.length; j++) {
+	          arr[i][j] = false;
 	        }
-		
-		       
-		return true;
-		 }
-	 }
-		 
+	      }
+	    for (int k = 0; k < l.length; k++) {
+	        arr[l[k][0]][l[k][1]]= true;
+	      }
+	    
+	  }
 	    
 /*This display method used to display the created board*/
-	 public String displayBoard(boolean[][]board) {
-		if(board==null)
-				return "Board printed";
-		for(int i=0;i<board.length;i++){
-		        for(int j=0;j<board[i].length;j++){
+	 public String toString() {
+		 String s = new String();
+		for(int i=0;i<arr.length;i++){
+		        for(int j=0;j<arr[i].length;j++){
 		            if(arr[i][j]==true){
-		                System.out.print("*");
+		               s+="*";
 		                
 		            }
 		            else{
-	                System.out.print(".");
+	                s+=".";
 		            	
 		            }
 		        } 
-		        System.out.println("");
+		       s+="\n";
 			}
-			return " ";	
-		  }	 
+		return s;
+				
+		  }	
+	 public boolean [][] nextgen(){//this method display the next generation cells.
+		    int n=arr.length;
+	        boolean[][] nextgen=new boolean[n][n];
+	        System.out.println("NextGenration");
+	        
+	        
+	        for(int l=0;l<n;l++){
+	            for(int m=0;m<n;m++){
+	                int adjacentlife=0;
+	            for(int i=-1;i<=1;i++){
+	                for(int j=-1;j<=1;j++){
+	                	if(l + i>=0 && l + i<this.boardsize && m + j>=0 && m + j<this.boardsize) {
+	                	
+	                    if(arr[l+i][m+j]){
+	                        adjacentlife=adjacentlife+1;
+	                    }
+	                	}
+	                }
+	            }
+	        
+	                    if(arr[l][m]){
+	                        adjacentlife=adjacentlife-1;
+	                    }
+	                    if((arr[l][m]==false)&&(adjacentlife==3)){
+	                    nextgen[l][m]=true;
+	                    }
+	                    else if((arr[l][m]==true)&&(adjacentlife<2)){
+	                    nextgen[l][m]=false;
+	                    }
+	                    else if((arr[l][m]==true)&&(adjacentlife>3)){
+	                    nextgen[l][m]=false;
+	                    }
+	                    else
+	                    nextgen[l][m]=arr[l][m];
+	                }
+	            }
+	             
+	       arr=nextgen;
+	    
+		
+		
+		return arr;
+		
+	}
+		
 }
 
+
+//explained by shruti
