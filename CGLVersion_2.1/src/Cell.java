@@ -14,6 +14,14 @@ public class Cell {
 //	public Cell() {
 //		
 //	}
+	/**
+	 * 
+	 * @param rows
+	 * @param cols
+	 */
+	public Cell() {
+		
+	}
 	public Cell(int rows,int cols) {
 		this.rows=rows;
 		this.cols=cols;
@@ -29,8 +37,19 @@ public class Cell {
 	public int cols(int cols) {
 		return cols;
 	}
+	/**
+	 * 
+	 * @param alive
+	 * @return
+	 * checks alive or not
+	 */
 	public boolean isAlive(boolean alive) {
 		return alive;
 	}
+	public boolean [][] nextgen(boolean[][]board){
+		return null;
+	}
+	
+	
 	
 }
