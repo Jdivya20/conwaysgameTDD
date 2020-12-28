@@ -25,7 +25,7 @@ public class Game {
 	int kthgen;
 	Board b;
 	
-	public String start() 
+	public static void main(String args[]) 
 	// when ever you call sample method, it read the inputs from user.
 	{
 		// b=new Board(); // object for board.
@@ -33,7 +33,7 @@ public class Game {
 	       
 	        // Reading size of the Board
 	        int n = sc.nextInt();  
-	       
+	        int x = sc.nextInt(); 
 	        // Reading no. of initial live cells
 	        int m = sc.nextInt();
 	        int[][] l = new int[m][2];
@@ -47,10 +47,17 @@ public class Game {
 	        sc.close();
 	     // calling createBoard method in board using object.
 	        Board b = new Board(n, l);
-	        while(true) {
-	        System.out.println( b.nextgen().toString()); 
-	        return ("Game started");
+//	        while(true) {
+//	        System.out.println( b.nextgen().toString()); 
+////	        return ("Game started");
+//	        }
+	        int y=0;
+	        while(y<=x) {
+	        	System.out.print("nextgenenation");
+	        	System.out.println( b.displayBoard(b.nextgen())); 
+	        	y++;
 	        }
+	        
 	  
 	}  
 }

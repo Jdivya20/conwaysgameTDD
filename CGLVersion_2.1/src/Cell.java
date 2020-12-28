@@ -38,7 +38,7 @@ public class Cell {
 	 * @return
 	 * checks alive or not
 	 */
-	public boolean isAlive(boolean alive) {
+	public boolean isAlive() {
 		return alive;
 	}
 

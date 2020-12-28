@@ -35,7 +35,7 @@ public class Board {
 	  }
 	    
 /*This display method used to display the created board*/
-	 public String toString() {
+	 public String displayBoard(boolean[][] arr) {
 		 String s = new String();
 		for(int i=0;i<arr.length;i++){
 		        for(int j=0;j<arr[i].length;j++){
