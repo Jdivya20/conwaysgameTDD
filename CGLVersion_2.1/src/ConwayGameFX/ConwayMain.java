@@ -1,3 +1,4 @@
+package ConwayGameFX;
 //package conwayJavaFX;
 
 import javafx.application.Application;

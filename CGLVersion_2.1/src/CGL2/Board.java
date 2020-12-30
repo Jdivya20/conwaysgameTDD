@@ -1,3 +1,4 @@
+package CGL2;
 /** 
  * 
  * @author divya
@@ -20,6 +21,8 @@ public class Board {
 	 * @return
 	 * this method creates a board
 	 */
+	
+
 	public Board(int boardsize, int l[][]) {
 	    this.boardsize = boardsize ;
 	    this.arr = new boolean[boardsize ][boardsize ];
@@ -33,6 +36,12 @@ public class Board {
 	      }
 	    
 	  }
+//	public Board(int boardSizeHeight, int[][] array1) {
+//		// TODO Auto-generated method stub
+//		this.boardsize = boardSizeHeight ;
+//	    this.arr = new boolean[boardsize ][boardsize ];
+//		
+//	}
 	    
 /*This display method used to display the created board*/
 	 public String displayBoard(boolean[][] arr) {
@@ -97,6 +106,7 @@ public class Board {
 		return arr;
 		
 	}
+
 		
 }
 

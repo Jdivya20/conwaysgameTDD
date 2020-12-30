@@ -1,3 +1,4 @@
+package CGL2;
 import java.util.Scanner;
 /**
  * ****************Conways Game Of Life***********************************
@@ -53,7 +54,7 @@ public class Game {
 //	        }
 	        int y=0;
 	        while(y<=x) {
-	        	System.out.print("nextgenenation");
+//	        	System.out.print("nextgenenation");
 	        	System.out.println( b.displayBoard(b.nextgen())); 
 	        	y++;
 	        }

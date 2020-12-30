@@ -1,9 +1,14 @@
+package ConwayGameFX;
 //package conwayJavaFX;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
+import CGL2.Board;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,6 +29,7 @@ import javafx.scene.shape.Rectangle;
  * <p> Copyright: Lynn Robert Carter © 2018-05-06 </p>
  * 
  * @author Lynn Robert Carter
+ * @co-author Divya Jandhyala
  * 
  * @version 2.03	2018-05-07 An implementation baseline for JavaFX graphics
  * 
@@ -77,15 +83,16 @@ public class UserInterface {
 	// These attributes define the Board used by the simulation and the graphical representation
 	// There are two Boards. The previous Board and the new Board.  Once the new Board has been
 	// displayed, it becomes the previous Board for the generation of the next new Board.
-	//private Board oddGameBoard = new Board();		// The Board for odd frames of the animation
+	private Board oddGameBoard;		// The Board for odd frames of the animation
 	private Pane oddCanvas = new Pane();			// Pane that holds its graphical representation
 	
-	//private Board evenGameBoard =  new Board();	// The Board for even frames of the animation
+	private Board evenGameBoard;	// The Board for even frames of the animation
 	private Pane evenCanvas = new Pane();			// Pane that holds its graphical representation
 
 	private boolean toggle = true;					// A two-state attribute that specifies which
 													// is the previous Board and which is the new
-	
+	boolean [][] currentgen;  //Boolean objects created for current and next generations
+	boolean [][] nextgene;
 	/**********************************************************************************************
 
 	Constructors
@@ -267,8 +274,62 @@ public class UserInterface {
 	private void loadImageData() {
 		try {
 			// Your code goes here......
+			Scanner sc=new Scanner(new File(str_FileName));//file to be scanned  
+//			int i=0;
+			ArrayList<List<Integer>> al = new ArrayList<List<Integer>>();
+
+			//returns true if there is another line to read  
+			while(sc.hasNextLine())  
+			{  
+				al.add(Arrays.asList(sc.nextInt(),sc.nextInt()));//adds every item in the file to the list
 			
-		}
+		    }
+			int [][] array1=new int[al.size()][2];//creating new array to store values of current generation
+		    int x=0;
+		    int y=0;
+			for(List<Integer> list :al) {
+				y = 0;
+				for(Integer i:list) {
+//					System.out.print(i+" ");
+					array1[x][y]=i;
+					y+=1;
+				}
+//				System.out.println(array1);
+				x+=1;
+			}
+//			sc.close();
+			for(int i=0;i<array1.length;i++) {
+				for(int j=0;j<array1[i].length;j++) {
+					System.out.print(array1[i][j]+" ");
+				}
+				System.out.println();
+			}
+//			currentgen=oddGameBoard.Board(boardSizeHeight,array1);
+			oddGameBoard=new Board(boardSizeHeight,array1);	//creating the oddGameBoard object
+			System.out.println(oddGameBoard+" in loadImage");
+			int array2[][]=new int[array1.length][2];	//creating an empty array to store values of nextgen
+			for(int i=0;i<array2.length;i++) {
+				for(int j=0;j<array2[i].length;j++) {
+					array2[i][j]=0;
+				}
+			}
+			evenGameBoard= new Board(boardSizeHeight,array2);//evenGameBoard object instantiated
+			window.getChildren().remove(oddCanvas);
+			oddCanvas=new Pane();
+//			for(int l=0;l<nextgene.length;l++){
+//	            for(int m=0;m<nextgene[l].length;m++){
+//	            
+//	            	if(nextgene[l][m]==true) {
+//	            		Rectangle rect = new Rectangle(cellSize,cellSize,cellSize*l,cellSize*m);
+//	            		rect.setFill(Color.ALICEBLUE);
+//	            		oddCanvas.getChildren().add(rect);
+//	            	
+//	            	}
+//	            }
+//	        
+//			}
+//		window.getChildren().add(oddCanvas);
+	}
 		catch (Exception e)  {
 			// Since we have already done this check, this exception should never happen
 		}
@@ -296,6 +357,9 @@ public class UserInterface {
 	 */
 	private void stopConway() {
 		// Your code goes here to display the current state of the board.
+//		(if(currentgen==nextgen) ||if(array1==0)){
+//			
+//		}
 		System.out.println("Game is stopping....");
 		System.exit(0);
 	}
@@ -307,7 +371,47 @@ public class UserInterface {
 		// Use the toggle to flip back and forth between the current generation and next generation boards.
 		
 		// Your code goes here...
-	}
+		if(toggle==false) {
+			currentgen = evenGameBoard.nextgen();
+			window.getChildren().remove(evenCanvas);
+			evenCanvas=new Pane();
+			for(int l=0;l<currentgen.length;l++){
+	            for(int m=0;m<currentgen[l].length;m++){
+	            
+	            if(currentgen[l][m]==true) {
+	            	Rectangle rect = new Rectangle(5,5);
+	            	rect.relocate(6*l,6*m);
+	            	rect.setFill(Color.RED);
+	            	evenCanvas.getChildren().add(rect);
+	            	
+		}
+	            }
+			}
+		}
+		else {
+		System.out.println(oddGameBoard+" in simulation");
+		nextgene=oddGameBoard.nextgen();
+		window.getChildren().remove(oddCanvas);
+		oddCanvas=new Pane();
+		for( int l=0;l<nextgene.length;l++){
+            for(int m=0;m<nextgene[l].length;m++){
+            
+            if(nextgene[l][m]==true) {
+            	Rectangle rect = new Rectangle(5,5);
+            	rect.relocate(6*l,6*m);
+            	rect.setFill(Color.RED);
+            	oddCanvas.getChildren().add(rect);
+            	
+	            }
+	          }
+	        
+	      }
+		
+		window.getChildren().add(oddCanvas);
+		currentgen=nextgene;
+		
+		}
+}
 
 	/**********
 	 * This method reads in the contents of the data file and discards it as quickly as it reads it
