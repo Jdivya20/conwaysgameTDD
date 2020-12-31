@@ -36,7 +36,7 @@ public class Board {
 	      }
 	    
 	  }
-//	public Board(int boardSizeHeight, int[][] array1) {
+//	public Board(int boardSizeHeight,filename) {
 //		// TODO Auto-generated method stub
 //		this.boardsize = boardSizeHeight ;
 //	    this.arr = new boolean[boardsize ][boardsize ];
@@ -110,5 +110,3 @@ public class Board {
 		
 }
 
-
-//explained by shruti

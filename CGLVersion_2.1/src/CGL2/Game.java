@@ -34,7 +34,7 @@ public class Game {
 	       
 	        // Reading size of the Board
 	        int n = sc.nextInt();  
-	        int x = sc.nextInt(); 
+	        int x = sc.nextInt(); //no of generations
 	        // Reading no. of initial live cells
 	        int m = sc.nextInt();
 	        int[][] l = new int[m][2];

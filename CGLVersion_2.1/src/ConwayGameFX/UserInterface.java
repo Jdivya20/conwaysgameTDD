@@ -297,9 +297,18 @@ public class UserInterface {
 //				System.out.println(array1);
 				x+=1;
 			}
-//			sc.close();
+			sc.close();
+//			boolean a[][]=
+//			nextgene = oddGameBoard.displayBoard(currentgen);
 			for(int i=0;i<array1.length;i++) {
 				for(int j=0;j<array1[i].length;j++) {
+					 
+//						   if(array1[i][j]==1) {
+//						   Rectangle rect = new Rectangle(5,5,Color.GREEN);
+//							rect.relocate(6*i,6*j);
+//							window.getChildren().add(rect);
+//					   
+//						   }
 					System.out.print(array1[i][j]+" ");
 				}
 				System.out.println();
@@ -311,24 +320,38 @@ public class UserInterface {
 			for(int i=0;i<array2.length;i++) {
 				for(int j=0;j<array2[i].length;j++) {
 					array2[i][j]=0;
+//					if(array2[i][j]==0) {
+//						  Rectangle rect = new Rectangle(5,5,Color.GREEN);
+//							rect.relocate(6*i,6*j);
+////							System.out.print("printing i---->",i);
+////							System.out.print("printing i---->",i);
+//							window.getChildren().add(rect);
+//					   
+//						   
+//					}
 				}
 			}
 			evenGameBoard= new Board(boardSizeHeight,array2);//evenGameBoard object instantiated
 			window.getChildren().remove(oddCanvas);
 			oddCanvas=new Pane();
-//			for(int l=0;l<nextgene.length;l++){
-//	            for(int m=0;m<nextgene[l].length;m++){
-//	            
-//	            	if(nextgene[l][m]==true) {
-//	            		Rectangle rect = new Rectangle(cellSize,cellSize,cellSize*l,cellSize*m);
-//	            		rect.setFill(Color.ALICEBLUE);
-//	            		oddCanvas.getChildren().add(rect);
-//	            	
-//	            	}
-//	            }
-//	        
-//			}
-//		window.getChildren().add(oddCanvas);
+//			nextgene=evenGameBoard.displayBoard(currentgen)
+			nextgene=oddGameBoard.nextgen();
+			for( int l=0;l<nextgene.length;l++){
+	            for(int m=0;m<nextgene[l].length;m++){
+	            System.out.print(nextgene[l][m]);
+	            if(nextgene[l][m]==true) {
+	            	Rectangle rect = new Rectangle(5,5);
+	            	rect.relocate(6*l,6*m);
+	            	rect.setFill(Color.GREEN);
+	            	oddCanvas.getChildren().add(rect);
+	            	
+		            }
+		          }
+		        
+		      }
+//			System.out.println("Hereeeeee");
+			window.getChildren().add(oddCanvas);//adding livecells
+
 	}
 		catch (Exception e)  {
 			// Since we have already done this check, this exception should never happen
@@ -357,9 +380,7 @@ public class UserInterface {
 	 */
 	private void stopConway() {
 		// Your code goes here to display the current state of the board.
-//		(if(currentgen==nextgen) ||if(array1==0)){
-//			
-//		}
+//		
 		System.out.println("Game is stopping....");
 		System.exit(0);
 	}
@@ -371,22 +392,25 @@ public class UserInterface {
 		// Use the toggle to flip back and forth between the current generation and next generation boards.
 		
 		// Your code goes here...
-		if(toggle==false) {
+		if(toggle==false) {//checking for the condition if toggle flag is false
 			currentgen = evenGameBoard.nextgen();
-			window.getChildren().remove(evenCanvas);
+			window.getChildren().remove(evenCanvas);//removing livecells from the pane
 			evenCanvas=new Pane();
+			System.out.println(currentgen.length);
 			for(int l=0;l<currentgen.length;l++){
 	            for(int m=0;m<currentgen[l].length;m++){
-	            
 	            if(currentgen[l][m]==true) {
-	            	Rectangle rect = new Rectangle(5,5);
-	            	rect.relocate(6*l,6*m);
-	            	rect.setFill(Color.RED);
+	            	Rectangle rect = new Rectangle(5,5);//instantiating the rectangle variable.
+	            	rect.relocate(6*l,6*m);//relocating the pattern as per the given dimensions
+	            	rect.setFill(Color.GREEN);//adding color to the live cells
 	            	evenCanvas.getChildren().add(rect);
 	            	
-		}
+	            	}
 	            }
+	            
 			}
+			window.getChildren().add(evenCanvas);//adding livecells to nextgen canvas
+    		nextgene=currentgen;
 		}
 		else {
 		System.out.println(oddGameBoard+" in simulation");
@@ -399,7 +423,7 @@ public class UserInterface {
             if(nextgene[l][m]==true) {
             	Rectangle rect = new Rectangle(5,5);
             	rect.relocate(6*l,6*m);
-            	rect.setFill(Color.RED);
+            	rect.setFill(Color.GREEN);
             	oddCanvas.getChildren().add(rect);
             	
 	            }
@@ -407,10 +431,13 @@ public class UserInterface {
 	        
 	      }
 		
-		window.getChildren().add(oddCanvas);
+		window.getChildren().add(oddCanvas);//adding livecells 
 		currentgen=nextgene;
 		
 		}
+//		if(currentgen==nextgene){
+//			stopConway();
+//		}
 }
 
 	/**********
